@@ -1,10 +1,12 @@
 package com.example.cinemaAutoatendimento.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "assentos")
+@Getter
 public class AssentoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,5 +32,4 @@ public class AssentoModel {
         this.numero = numero;
         this.sessao = sessao;
     }
-    
 }
