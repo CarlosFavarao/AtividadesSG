@@ -1,45 +1,73 @@
+import java.math.BigDecimal;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class CaixaEletronico {
-    private double value;
 
+    Map<BigDecimal, Integer> cashQuantity = new LinkedHashMap<>();
+    {
+        cashQuantity.put(BigDecimal.valueOf(200), 1);
+        cashQuantity.put(BigDecimal.valueOf(100), 1);
+        cashQuantity.put(BigDecimal.valueOf(50), 0);
+        cashQuantity.put(BigDecimal.valueOf(20), 0);
+        cashQuantity.put(BigDecimal.valueOf(10), 2);
+        cashQuantity.put(BigDecimal.valueOf(5), 0);
+        cashQuantity.put(BigDecimal.valueOf(2), 0);
+        cashQuantity.put(BigDecimal.valueOf(1), 0);
+        cashQuantity.put(BigDecimal.valueOf(0.50),0);
+        cashQuantity.put(BigDecimal.valueOf(0.25),0);
+        cashQuantity.put(BigDecimal.valueOf(0.10),0);
+        cashQuantity.put(BigDecimal.valueOf(0.05),0);
+        cashQuantity.put(BigDecimal.valueOf(0.01),0);
+    }
 
-    public void sacar(double value){
-        int[] notes = {200, 100, 50, 20, 10, 5, 2};
-        int[] qtdNotes = {1, 0, 2, 0, 0, 2, 0};
-        double[] coins = {1, 0.50, 0.25, 0.10, 0.05, 0.01};
-        int[]qtdCoins = {3, 0, 2, 0, 0, 0};
+    public boolean hasBalance(BigDecimal value){
+        BigDecimal totalCashBalance = BigDecimal.ZERO;
 
-        System.out.println("Sacando o valor: " + value);
+        for (Map.Entry<BigDecimal, Integer> entry : cashQuantity.entrySet()){
+            BigDecimal noteValue = entry.getKey();
+            int quantity = entry.getValue();
+            totalCashBalance = totalCashBalance.add(noteValue.multiply(BigDecimal.valueOf(quantity)));
+        }
+        return totalCashBalance.compareTo(value) >= 0;
+    }
 
-        int i = 0;
-        for (int note : notes){
-            if (qtdNotes[i] > 0) {
-                int quant = (int) (value / note);
-                if (quant > 0) {
-                    if (quant > 1) {
-                        System.out.println(quant + " notas de " + note);
-                    } else {
-                        System.out.println(quant + " nota de " + note);
+    public void refresh(BigDecimal value) {
+        for (Map.Entry<BigDecimal, Integer> entry : cashQuantity.entrySet()) {
+            BigDecimal noteValue = entry.getKey();
+            int quantity = entry.getValue();
+            int qtdUsed = value.divideToIntegralValue(noteValue).intValue();
+
+            if (qtdUsed > 0 && quantity > 0) {
+                int qtdForRetire = Math.min(qtdUsed, quantity);
+                cashQuantity.put(noteValue, quantity - qtdForRetire);
+                value = value.subtract(noteValue.multiply(BigDecimal.valueOf(qtdForRetire)));
+                if (noteValue.compareTo(BigDecimal.ONE) > 0){
+                    if (qtdForRetire > 1){
+                        System.out.println("Retiradas " + qtdForRetire + " cédulas de R$ " + noteValue);
+                    }else {
+                        System.out.println("Retirada " + qtdForRetire + " cédula de R$ " + noteValue);
                     }
-                    value = value % note;
+                }else{
+                    if (qtdForRetire > 1) {
+                        System.out.println("Retiradas " + qtdForRetire + " moedas de R$ " + noteValue);
+                    }else {
+                        System.out.println("Retirada " + qtdForRetire + " moeda de R$ " + noteValue);
+                    }
                 }
             }
-            i++;
         }
 
-        i = 0;
-        for (double coin : coins){
-            if (qtdCoins[i] > 0) {
-                int quant = (int) (value / coin);
-                if (quant > 0) {
-                    System.out.println(quant + " moedas de " + coin);
-                    value = value % coin;
-                }
-            }
-            i++;
+        if (value.compareTo(BigDecimal.ZERO) > 0) {
+            System.out.println("Não foi possível sacar o valor exato devido à falta de cédulas/moedas adequadas.");
+        } else {
+            System.out.println("Caixa atualizado com sucesso!");
         }
     }
 
-    public double getValue() {
-        return value;
+
+    public Map<BigDecimal, Integer> getCashQuantity() {
+        return cashQuantity;
     }
+
 }
