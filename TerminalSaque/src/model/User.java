@@ -1,3 +1,5 @@
+package model;
+
 import java.math.BigDecimal;
 
 public class User {
@@ -12,6 +14,8 @@ public class User {
         balance = balance.subtract(amount);
     }
 
+    //---------------------------------------------
+    //Construtores, getters e setters
     public User(String name, BigDecimal balance) {
         this.name = name;
         this.balance = balance;

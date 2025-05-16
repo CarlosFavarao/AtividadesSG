@@ -1,3 +1,5 @@
+package model;
+
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -8,7 +10,7 @@ public class CaixaEletronico {
     {
         cashQuantity.put(BigDecimal.valueOf(200), 1);
         cashQuantity.put(BigDecimal.valueOf(100), 1);
-        cashQuantity.put(BigDecimal.valueOf(50), 0);
+        cashQuantity.put(BigDecimal.valueOf(50), 2);
         cashQuantity.put(BigDecimal.valueOf(20), 0);
         cashQuantity.put(BigDecimal.valueOf(10), 2);
         cashQuantity.put(BigDecimal.valueOf(5), 0);
@@ -35,12 +37,12 @@ public class CaixaEletronico {
     public void refresh(BigDecimal value) {
         for (Map.Entry<BigDecimal, Integer> entry : cashQuantity.entrySet()) {
             BigDecimal noteValue = entry.getKey();
-            int quantity = entry.getValue();
-            int qtdUsed = value.divideToIntegralValue(noteValue).intValue();
+            int availableNotes = entry.getValue();
+            int notesToWithdraw = value.divideToIntegralValue(noteValue).intValue();
 
-            if (qtdUsed > 0 && quantity > 0) {
-                int qtdForRetire = Math.min(qtdUsed, quantity);
-                cashQuantity.put(noteValue, quantity - qtdForRetire);
+            if (notesToWithdraw > 0 && availableNotes > 0) {
+                int qtdForRetire = Math.min(notesToWithdraw, availableNotes);
+                cashQuantity.put(noteValue, availableNotes - qtdForRetire);
                 value = value.subtract(noteValue.multiply(BigDecimal.valueOf(qtdForRetire)));
                 if (noteValue.compareTo(BigDecimal.ONE) > 0){
                     if (qtdForRetire > 1){
