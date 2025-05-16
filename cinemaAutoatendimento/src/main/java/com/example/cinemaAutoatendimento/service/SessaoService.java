@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SessaoService {
@@ -19,5 +20,13 @@ public class SessaoService {
 
     public List<SessaoModel> listarSessoesPorFilme(int filmeId){
         return sessaoRepository.findByFilmeId(filmeId);
+    }
+
+    public Optional<SessaoModel> acharSessaoPorId(int id){
+        return sessaoRepository.findById(id);
+    }
+
+    public void excluirSessao(int id) {
+        sessaoRepository.deleteById(id);
     }
 }
