@@ -8,19 +8,19 @@ public class CaixaEletronico {
 
     Map<BigDecimal, Integer> cashQuantity = new LinkedHashMap<>();
     {
-        cashQuantity.put(BigDecimal.valueOf(200), 1);
-        cashQuantity.put(BigDecimal.valueOf(100), 1);
-        cashQuantity.put(BigDecimal.valueOf(50), 2);
-        cashQuantity.put(BigDecimal.valueOf(20), 0);
-        cashQuantity.put(BigDecimal.valueOf(10), 2);
-        cashQuantity.put(BigDecimal.valueOf(5), 0);
-        cashQuantity.put(BigDecimal.valueOf(2), 0);
-        cashQuantity.put(BigDecimal.valueOf(1), 0);
-        cashQuantity.put(BigDecimal.valueOf(0.50),0);
-        cashQuantity.put(BigDecimal.valueOf(0.25),0);
-        cashQuantity.put(BigDecimal.valueOf(0.10),0);
-        cashQuantity.put(BigDecimal.valueOf(0.05),0);
-        cashQuantity.put(BigDecimal.valueOf(0.01),0);
+        cashQuantity.put(BigDecimal.valueOf(200), 5);
+        cashQuantity.put(BigDecimal.valueOf(100), 5);
+        cashQuantity.put(BigDecimal.valueOf(50), 5);
+        cashQuantity.put(BigDecimal.valueOf(20), 5);
+        cashQuantity.put(BigDecimal.valueOf(10), 5);
+        cashQuantity.put(BigDecimal.valueOf(5), 5);
+        cashQuantity.put(BigDecimal.valueOf(2), 5);
+        cashQuantity.put(BigDecimal.valueOf(1), 5);
+        cashQuantity.put(BigDecimal.valueOf(0.50),5);
+        cashQuantity.put(BigDecimal.valueOf(0.25),5);
+        cashQuantity.put(BigDecimal.valueOf(0.10),5);
+        cashQuantity.put(BigDecimal.valueOf(0.05),5);
+        cashQuantity.put(BigDecimal.valueOf(0.01),5);
     }
 
     public boolean hasBalance(BigDecimal value){

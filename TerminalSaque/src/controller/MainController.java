@@ -2,10 +2,12 @@ package controller;
 
 import model.CaixaEletronico;
 import model.User;
+import validation.Validation;
 import view.MainMenuView;
 import view.SaqueView;
 import view.UserView;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -13,6 +15,7 @@ import java.util.Scanner;
 public class MainController {
     private Map<String, User> users;
     private CaixaEletronico caixaEletronico;
+    private static Validation validation = new Validation();
 
     public MainController() {
         caixaEletronico = new CaixaEletronico();
@@ -24,7 +27,7 @@ public class MainController {
 
         while (true) {
             MainMenuView.showMenu();
-            int op = scanner.nextInt();
+            int op = validation.readValidInt(scanner);
 
             switch (op){
                 case 1:
