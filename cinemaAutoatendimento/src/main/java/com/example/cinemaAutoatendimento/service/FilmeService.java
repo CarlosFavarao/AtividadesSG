@@ -18,6 +18,19 @@ public class FilmeService {
         return filmeRepository.save(filme);
     }
 
+    public FilmeModel atualizarFilme(int id, FilmeModel filmeAtualizado){
+        Optional<FilmeModel> filmeExistente = filmeRepository.findById(id);
+        if (filmeExistente.isPresent()){
+            FilmeModel filme = filmeExistente.get();
+            filme.setNome(filmeAtualizado.getNome());
+            filme.setData_inicio(filmeAtualizado.getData_inicio());
+            filme.setData_fim(filmeAtualizado.getData_fim());
+
+            return filmeRepository.save(filme);
+        }
+        return null;
+    }
+
     public List<FilmeModel> listarFilmes(){
         return filmeRepository.findAll();
     }
@@ -26,7 +39,11 @@ public class FilmeService {
         return filmeRepository.findById(id);
     }
 
-    public void excluirFilme(int id){
-        filmeRepository.deleteById(id);
+    public boolean excluirFilme(int id){
+        if (filmeRepository.existsById(id)){
+            filmeRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

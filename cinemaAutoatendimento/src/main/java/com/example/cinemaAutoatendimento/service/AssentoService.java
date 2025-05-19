@@ -44,4 +44,13 @@ public class AssentoService {
         }
         return null;
     }
+
+    public boolean excluirAssento(int id){
+        if (assentoRepository.existsById(id)){
+            assentoRepository.deleteById(id);
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

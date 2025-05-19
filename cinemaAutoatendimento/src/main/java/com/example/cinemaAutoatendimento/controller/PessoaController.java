@@ -16,6 +16,11 @@ public class PessoaController {
     @Autowired
     private PessoaService pessoaService;
 
+    @PostMapping
+    public PessoaModel salvarPessoa(@RequestBody PessoaModel pessoa){
+        return pessoaService.salvarPessoa(pessoa);
+    }
+
     @GetMapping
     public List<PessoaModel> listarPessoas(){
         return pessoaService.listarPessoas();
@@ -25,11 +30,6 @@ public class PessoaController {
     public ResponseEntity<PessoaModel> buscarPessoaPorId(@PathVariable int id){
         Optional<PessoaModel> pessoa = pessoaService.buscarPessoaPorId(id);
         return pessoa.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @PostMapping
-    public PessoaModel criarPessoa(@RequestBody PessoaModel pessoa){
-        return pessoaService.salvarPessoa(pessoa);
     }
 
     @PutMapping("/{id}")

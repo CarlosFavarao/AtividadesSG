@@ -18,6 +18,19 @@ public class SessaoService {
         return sessaoRepository.save(sessao);
     }
 
+    public SessaoModel atualizarSessao(int id, SessaoModel sessaoAtualizada) {
+        Optional<SessaoModel> sessaoExistente = sessaoRepository.findById(id);
+        if (sessaoExistente.isPresent()) {
+            SessaoModel sessao = sessaoExistente.get();
+            sessao.setNumero_sessao(sessaoAtualizada.getNumero_sessao());
+            sessao.setHorario_inicio(sessaoAtualizada.getHorario_inicio());
+            sessao.setHorario_fim(sessaoAtualizada.getHorario_fim());
+            sessao.setFilme(sessaoAtualizada.getFilme());
+            return sessaoRepository.save(sessao);
+        }
+        return null;
+    }
+
     public List<SessaoModel> listarSessoesPorFilme(int filmeId){
         return sessaoRepository.findByFilmeId(filmeId);
     }
@@ -26,7 +39,11 @@ public class SessaoService {
         return sessaoRepository.findById(id);
     }
 
-    public void excluirSessao(int id) {
-        sessaoRepository.deleteById(id);
+    public boolean excluirSessao(int id) {
+        if (sessaoRepository.existsById(id)){
+            sessaoRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

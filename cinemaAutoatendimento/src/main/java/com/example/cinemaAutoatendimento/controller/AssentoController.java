@@ -3,6 +3,7 @@ package com.example.cinemaAutoatendimento.controller;
 import com.example.cinemaAutoatendimento.model.AssentoModel;
 import com.example.cinemaAutoatendimento.service.AssentoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +14,16 @@ public class AssentoController {
 
     @Autowired
     private AssentoService assentoService;
+
+    @PostMapping("/ocupar/{id}")
+    public AssentoModel ocuparAssento(@PathVariable int id){
+        return assentoService.ocuparAssento(id);
+    }
+
+    @PutMapping("/desocupar/{id}")
+    public AssentoModel desocuparAssento(@PathVariable int id){
+        return assentoService.desocuparAssento(id);
+    }
 
     //vou colocar só por sessão, não tem sentido algum listar assentos aleatórios de todas as sessões...
     @GetMapping("/sessao/{sessaoId}")
@@ -26,13 +37,13 @@ public class AssentoController {
         return assentoService.listarAssentosLivresPorSessao(sessaoId);
     }
 
-    @PostMapping("/ocupar/{id}")
-    public AssentoModel ocuparAssento(@PathVariable int id){
-        return assentoService.ocuparAssento(id);
-    }
-
-    @PutMapping("/desocupar/{id}")
-    public AssentoModel desocuparAssento(@PathVariable int id){
-        return assentoService.desocuparAssento(id);
+    @DeleteMapping
+    public ResponseEntity<Void> excluirAssento(@PathVariable int id){
+        boolean deleted = assentoService.excluirAssento(id);
+        if (deleted){
+            return ResponseEntity.noContent().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 }
