@@ -17,36 +17,36 @@ public class SessaoController {
     private SessaoService sessaoService;
 
     @PostMapping
-    public SessaoModel salvarSessao(@RequestBody SessaoModel sessao){
+    public SessaoModel salvarSessao(@RequestBody SessaoModel sessao) {
         return sessaoService.salvarSessao(sessao);
     }
 
     @PutMapping("/{id}")
-    public SessaoModel atualizarSessao(@PathVariable int id, @RequestBody SessaoModel sessaoAtualizada){
+    public SessaoModel atualizarSessao(@PathVariable int id, @RequestBody SessaoModel sessaoAtualizada) {
         return sessaoService.atualizarSessao(id, sessaoAtualizada);
     }
 
     @GetMapping
-    public List<SessaoModel> listarSessoes(){
+    public List<SessaoModel> listarSessoes() {
         return sessaoService.listarSessoes();
     }
 
     @GetMapping("/filme/{filmeId}")
-    public List<SessaoModel> listarSessoesPorFilme(@PathVariable int filmeId){
+    public List<SessaoModel> listarSessoesPorFilme(@PathVariable int filmeId) {
         return sessaoService.listarSessoesPorFilme(filmeId);
     }
 
     @GetMapping("/{id}")
-    public Optional<SessaoModel> acharSessaoPorId(@PathVariable int id){
+    public Optional<SessaoModel> acharSessaoPorId(@PathVariable int id) {
         return sessaoService.acharSessaoPorId(id);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluirSessao(@PathVariable int id){
+    public ResponseEntity<Void> excluirSessao(@PathVariable int id) {
         boolean deleted = sessaoService.excluirSessao(id);
-        if (deleted){
+        if (deleted) {
             return ResponseEntity.noContent().build();
-        }else{
+        } else {
             return ResponseEntity.notFound().build();
         }
     }

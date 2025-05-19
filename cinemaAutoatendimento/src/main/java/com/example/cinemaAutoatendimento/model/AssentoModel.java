@@ -26,7 +26,7 @@ public class AssentoModel {
     private SessaoModel sessao;
 
     @Setter
-    @Column(nullable = false)
+    @Column
     private boolean ocupado;
 
     public AssentoModel() {}

@@ -1,7 +1,9 @@
 package com.example.cinemaAutoatendimento.service;
 
 import com.example.cinemaAutoatendimento.model.AssentoModel;
+import com.example.cinemaAutoatendimento.model.SessaoModel;
 import com.example.cinemaAutoatendimento.repository.AssentoRepository;
+import com.example.cinemaAutoatendimento.repository.SessaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,17 @@ public class AssentoService {
     @Autowired
     private AssentoRepository assentoRepository;
 
-    public AssentoModel salvarAssento(AssentoModel assento){
+    @Autowired
+    SessaoRepository sessaoRepository;
+
+    public AssentoModel salvarAssento(AssentoModel assento) {
+        SessaoModel sessao = sessaoRepository.findById(assento.getSessao().getId())
+                .orElseThrow(() -> new RuntimeException("Sessão não encontrada"));
+        assento.setSessao(sessao);
+
         return assentoRepository.save(assento);
     }
+
 
     public List<AssentoModel> listarAssentosPorSessao(int sessaoId){
         return assentoRepository.findBySessaoId(sessaoId);
