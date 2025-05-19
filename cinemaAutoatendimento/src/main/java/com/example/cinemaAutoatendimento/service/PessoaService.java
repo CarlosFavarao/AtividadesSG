@@ -32,4 +32,10 @@ public class PessoaService {
         }
         return false;
     }
+
+    public PessoaModel atualizarPessoa(int id, String nome) {
+        PessoaModel pessoa = pessoaRepository.findById(id).orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
+        pessoa.setNome(nome);
+        return pessoaRepository.save(pessoa);
+    }
 }

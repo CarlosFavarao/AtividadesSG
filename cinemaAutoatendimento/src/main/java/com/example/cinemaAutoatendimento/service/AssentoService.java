@@ -34,4 +34,14 @@ public class AssentoService {
         }
         return null;
     }
+
+    public AssentoModel desocuparAssento(int id) {
+        Optional<AssentoModel> assento = assentoRepository.findById(id);
+        if (assento.isPresent()) {
+            AssentoModel assentoDesocupado = assento.get();
+            assentoDesocupado.setOcupado(false);
+            return assentoRepository.save(assentoDesocupado);
+        }
+        return null;
+    }
 }
