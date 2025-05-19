@@ -31,6 +31,10 @@ public class SessaoService {
         return null;
     }
 
+    public List<SessaoModel> listarSessoes(){
+        return sessaoRepository.findAll();
+    }
+
     public List<SessaoModel> listarSessoesPorFilme(int filmeId){
         return sessaoRepository.findByFilmeId(filmeId);
     }

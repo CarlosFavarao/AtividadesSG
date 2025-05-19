@@ -26,6 +26,11 @@ public class SessaoController {
         return sessaoService.atualizarSessao(id, sessaoAtualizada);
     }
 
+    @GetMapping
+    public List<SessaoModel> listarSessoes(){
+        return sessaoService.listarSessoes();
+    }
+
     @GetMapping("/filme/{filmeId}")
     public List<SessaoModel> listarSessoesPorFilme(@PathVariable int filmeId){
         return sessaoService.listarSessoesPorFilme(filmeId);
