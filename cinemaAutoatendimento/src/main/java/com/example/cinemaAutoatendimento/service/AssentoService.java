@@ -18,11 +18,10 @@ public class AssentoService {
     @Autowired
     SessaoRepository sessaoRepository;
 
-    public AssentoModel salvarAssento(AssentoModel assento) {
-        SessaoModel sessao = sessaoRepository.findById(assento.getSessao().getId())
-                .orElseThrow(() -> new RuntimeException("Sessão não encontrada"));
-        assento.setSessao(sessao);
+    public AssentoModel salvarAssento(int id, AssentoModel assento) {
+        SessaoModel sessao = sessaoRepository.findById(id).orElseThrow(() -> new RuntimeException("Sessão não encontrada"));
 
+        assento.setSessao(sessao);
         return assentoRepository.save(assento);
     }
 

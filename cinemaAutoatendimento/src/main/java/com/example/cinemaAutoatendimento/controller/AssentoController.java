@@ -15,13 +15,12 @@ public class AssentoController {
     @Autowired
     private AssentoService assentoService;
 
-    @PostMapping
-    AssentoModel salvarAssento(@RequestBody AssentoModel assento){
-        return assentoService.salvarAssento(assento);
+    @PostMapping("/sessao/{id}")
+    AssentoModel salvarAssento(@PathVariable int id, @RequestBody AssentoModel assento){
+        return assentoService.salvarAssento(id, assento);
     }
 
-
-    @PostMapping("/ocupar/{id}")
+    @PutMapping("/ocupar/{id}")
     public AssentoModel ocuparAssento(@PathVariable int id){
         return assentoService.ocuparAssento(id);
     }
