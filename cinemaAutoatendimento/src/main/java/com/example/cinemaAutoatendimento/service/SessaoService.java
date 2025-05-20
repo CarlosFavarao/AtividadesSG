@@ -15,7 +15,7 @@ public class SessaoService {
     private SessaoRepository sessaoRepository;
 
     public SessaoModel salvarSessao(SessaoModel novaSessao){ //Isso vai desativar qualquer sessão com o mesmo numero
-        SessaoModel sessaoAtivaExiste = sessaoRepository.findByNumeroSessaoAndAtivaTrue(novaSessao.getNumero_sessao()).orElse(null);
+        SessaoModel sessaoAtivaExiste = sessaoRepository.findByNumeroSessaoAndAtivaTrue(novaSessao.getNumeroSessao()).orElse(null);
 
         if (sessaoAtivaExiste != null){
             sessaoAtivaExiste.setAtiva(false);
@@ -29,7 +29,7 @@ public class SessaoService {
         Optional<SessaoModel> sessaoExistente = sessaoRepository.findById(id);
         if (sessaoExistente.isPresent()) {
             SessaoModel sessao = sessaoExistente.get();
-            sessao.setNumero_sessao(sessaoAtualizada.getNumero_sessao());
+            sessao.setNumeroSessao(sessaoAtualizada.getNumeroSessao());
             sessao.setHorario_inicio(sessaoAtualizada.getHorario_inicio());
             sessao.setHorario_fim(sessaoAtualizada.getHorario_fim());
             sessao.setFilme(sessaoAtualizada.getFilme());

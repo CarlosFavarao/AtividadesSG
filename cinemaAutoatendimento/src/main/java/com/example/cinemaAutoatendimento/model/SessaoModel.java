@@ -15,8 +15,8 @@ public class SessaoModel {
     private int id;
 
     @Setter
-    @Column(nullable = false)
-    private int numero_sessao;
+    @Column(name = "numero_sessao",nullable = false)
+    private int numeroSessao;
 
     @Setter
     @Column(nullable = false)
@@ -37,10 +37,10 @@ public class SessaoModel {
 
     public SessaoModel() {}
 
-    public SessaoModel(FilmeModel filme, LocalTime horario_fim, LocalTime horario_inicio, int numero_sessao) {
+    public SessaoModel(FilmeModel filme, LocalTime horario_fim, LocalTime horario_inicio, int numeroSessao) {
         this.filme = filme;
         this.horario_fim = horario_fim;
         this.horario_inicio = horario_inicio;
-        this.numero_sessao = numero_sessao;
+        this.numeroSessao = numeroSessao;
     }
 }
