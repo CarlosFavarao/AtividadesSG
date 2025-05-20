@@ -12,7 +12,7 @@ import java.time.LocalTime;
 public class SessaoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Setter
     @Column(name = "numero_sessao",nullable = false)

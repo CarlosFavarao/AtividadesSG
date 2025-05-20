@@ -21,13 +21,13 @@ public class PessoaService {
         return pessoaRepository.findAll();
     }
 
-    public PessoaModel buscarPessoaPorId(int id){
+    public PessoaModel buscarPessoaPorId(Long id){
         return pessoaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pessoa não encontrada com id " + id));
     }
 
 
-    public boolean excluirPessoa(int id) {
+    public boolean excluirPessoa(Long id) {
         if (pessoaRepository.existsById(id)){
             pessoaRepository.deleteById(id);
             return true;
@@ -35,7 +35,7 @@ public class PessoaService {
         return false;
     }
 
-    public PessoaModel atualizarPessoa(int id, String nome) {
+    public PessoaModel atualizarPessoa(Long id, String nome) {
         PessoaModel pessoa = pessoaRepository.findById(id).orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
         pessoa.setNome(nome);
         return pessoaRepository.save(pessoa);

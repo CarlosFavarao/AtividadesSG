@@ -10,7 +10,7 @@ import lombok.Setter;
 public class AssentoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Setter
     @Column(nullable = false)

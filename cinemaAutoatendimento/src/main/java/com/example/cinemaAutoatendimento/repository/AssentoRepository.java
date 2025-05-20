@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AssentoRepository extends JpaRepository<AssentoModel, Integer> {
-    List<AssentoModel> findBySessaoId(int sessaoId);
-    List<AssentoModel> findBySessaoIdAndPessoaIsNull(int sessoId);
+public interface AssentoRepository extends JpaRepository<AssentoModel, Long> {
+    List<AssentoModel> findBySessaoId(Long sessaoId);
+    List<AssentoModel> findBySessaoIdAndPessoaIsNull(Long sessoId);
 }

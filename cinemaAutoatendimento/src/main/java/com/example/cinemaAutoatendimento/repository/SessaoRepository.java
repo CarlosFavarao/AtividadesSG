@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface SessaoRepository extends JpaRepository<SessaoModel, Integer> {
+public interface SessaoRepository extends JpaRepository<SessaoModel, Long> {
     //Os nomes são autoexplicativos
-    List<SessaoModel> findByFilmeId(int filmeId);
+    List<SessaoModel> findByFilmeId(Long filmeId);
     List<SessaoModel> findByAtivaTrue();
-    List<SessaoModel> findByFilmeIdAndAtivaTrue(int filmeId);
+    List<SessaoModel> findByFilmeIdAndAtivaTrue(Long filmeId);
     Optional<SessaoModel> findByNumeroSessaoAndAtivaTrue(int numeroSessao);
 }

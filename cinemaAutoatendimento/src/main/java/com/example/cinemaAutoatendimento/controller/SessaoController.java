@@ -23,7 +23,7 @@ public class SessaoController {
     }
 
     @PutMapping("/{id}")
-    public SessaoModel atualizarSessao(@PathVariable int id, @RequestBody SessaoModel sessaoAtualizada) {
+    public SessaoModel atualizarSessao(@PathVariable Long id, @RequestBody SessaoModel sessaoAtualizada) {
         return sessaoService.atualizarSessao(id, sessaoAtualizada);
     }
 
@@ -33,17 +33,17 @@ public class SessaoController {
     }
 
     @GetMapping("/filme/{filmeId}")
-    public List<SessaoModel> listarSessoesPorFilme(@PathVariable int filmeId) {
+    public List<SessaoModel> listarSessoesPorFilme(@PathVariable Long filmeId) {
         return sessaoService.listarSessoesPorFilme(filmeId);
     }
 
     @GetMapping("/{id}")
-    public Optional<SessaoModel> acharSessaoPorId(@PathVariable int id) {
+    public Optional<SessaoModel> acharSessaoPorId(@PathVariable Long id) {
         return sessaoService.acharSessaoPorId(id);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluirSessao(@PathVariable int id) {
+    public ResponseEntity<Void> excluirSessao(@PathVariable Long id) {
         boolean deleted = sessaoService.excluirSessao(id);
         if (deleted) {
             return ResponseEntity.noContent().build();
@@ -66,12 +66,12 @@ public class SessaoController {
     }
 
     @GetMapping("/ativas/filme/{filmeId}")
-    public List<SessaoModel> listarSessoesAtivasPorFilme(@PathVariable int filmeId) {
+    public List<SessaoModel> listarSessoesAtivasPorFilme(@PathVariable Long filmeId) {
         return sessaoService.listarSessoesAtivasPorFilme(filmeId);
     }
 
     @PutMapping("/{id}/desativar")
-    public SessaoModel desativarSessao(@PathVariable int id) {
+    public SessaoModel desativarSessao(@PathVariable Long id) {
         return sessaoService.desativarSessao(id);
     }
 

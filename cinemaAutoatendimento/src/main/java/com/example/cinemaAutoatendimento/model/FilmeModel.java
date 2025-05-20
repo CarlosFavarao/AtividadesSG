@@ -11,7 +11,7 @@ public class FilmeModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Setter
     @Column(nullable = false)

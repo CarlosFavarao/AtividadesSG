@@ -25,7 +25,7 @@ public class SessaoService {
         return sessaoRepository.save(novaSessao);
     }
 
-    public SessaoModel atualizarSessao(int id, SessaoModel sessaoAtualizada) {
+    public SessaoModel atualizarSessao(Long id, SessaoModel sessaoAtualizada) {
         Optional<SessaoModel> sessaoExistente = sessaoRepository.findById(id);
         if (sessaoExistente.isPresent()) {
             SessaoModel sessao = sessaoExistente.get();
@@ -43,16 +43,16 @@ public class SessaoService {
         return sessaoRepository.findAll();
     }
 
-    public List<SessaoModel> listarSessoesPorFilme(int filmeId){
+    public List<SessaoModel> listarSessoesPorFilme(Long filmeId){
         return sessaoRepository.findByFilmeId(filmeId);
     }
 
-    public Optional<SessaoModel> acharSessaoPorId(int id){
+    public Optional<SessaoModel> acharSessaoPorId(Long id){
         return sessaoRepository.findById(id);
     }
 
     //Deletar...
-    public boolean excluirSessao(int id) {
+    public boolean excluirSessao(Long id) {
         if (sessaoRepository.existsById(id)){
             sessaoRepository.deleteById(id);
             return true;
@@ -65,7 +65,7 @@ public class SessaoService {
         return sessaoRepository.findByAtivaTrue();
     }
 
-    public List<SessaoModel> listarSessoesAtivasPorFilme(int filmeId) {
+    public List<SessaoModel> listarSessoesAtivasPorFilme(Long filmeId) {
         return sessaoRepository.findByFilmeIdAndAtivaTrue(filmeId);
     }
 
@@ -73,7 +73,7 @@ public class SessaoService {
         return sessaoRepository.findByNumeroSessaoAndAtivaTrue(numeroSessao);
     }
 
-    public SessaoModel desativarSessao(int id) {
+    public SessaoModel desativarSessao(Long id) {
         Optional<SessaoModel> sessao = sessaoRepository.findById(id);
         if (sessao.isPresent()) {
             SessaoModel s = sessao.get();

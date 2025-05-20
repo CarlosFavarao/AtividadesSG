@@ -27,7 +27,7 @@ public class PessoaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PessoaModel> buscarPessoaPorId(@PathVariable int id){
+    public ResponseEntity<PessoaModel> buscarPessoaPorId(@PathVariable Long id){
         try {
             PessoaModel pessoa = pessoaService.buscarPessoaPorId(id);
             return ResponseEntity.ok(pessoa);
@@ -37,12 +37,12 @@ public class PessoaController {
     }
 
     @PutMapping("/{id}")
-    public PessoaModel atualizarPessoa(@PathVariable int id, @RequestBody String nome){
+    public PessoaModel atualizarPessoa(@PathVariable Long id, @RequestBody String nome){
         return pessoaService.atualizarPessoa(id, nome);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluirPessoa(@PathVariable int id) {
+    public ResponseEntity<Void> excluirPessoa(@PathVariable Long id) {
         boolean deleted = pessoaService.excluirPessoa(id);
         if (deleted){
             return ResponseEntity.noContent().build();
