@@ -42,7 +42,7 @@ public class AssentoService {
         return  assentoRepository.save(assento);
     }
 
-    public AssentoModel desocuparAssento(int id, PessoaModel pessoa) {
+    public AssentoModel desocuparAssento(int id) {
         AssentoModel assento = assentoRepository.findById(id).orElseThrow(() -> new RuntimeException("Assento não encontrado"));
         assento.setPessoa(null);
 

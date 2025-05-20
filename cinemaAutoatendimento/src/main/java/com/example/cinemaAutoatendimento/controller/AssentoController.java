@@ -49,7 +49,7 @@ public class AssentoController {
         return assentoService.listarAssentosLivresPorSessao(sessaoId);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluirAssento(@PathVariable int id){
         boolean deleted = assentoService.excluirAssento(id);
         if (deleted){
