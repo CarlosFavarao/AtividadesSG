@@ -14,8 +14,15 @@ public class SessaoService {
     @Autowired
     private SessaoRepository sessaoRepository;
 
-    public SessaoModel salvarSessao(SessaoModel sessao){
-        return sessaoRepository.save(sessao);
+    public SessaoModel salvarSessao(SessaoModel novaSessao){ //Isso vai desativar qualquer sessão com o mesmo numero
+        SessaoModel sessaoAtivaExiste = sessaoRepository.findByNumeroSessaoAndAtivaTrue(novaSessao.getNumero_sessao()).orElse(null);
+
+        if (sessaoAtivaExiste != null){
+            sessaoAtivaExiste.setAtiva(false);
+            sessaoRepository.save(sessaoAtivaExiste);
+        }
+
+        return sessaoRepository.save(novaSessao);
     }
 
     public SessaoModel atualizarSessao(int id, SessaoModel sessaoAtualizada) {
@@ -31,6 +38,7 @@ public class SessaoService {
         return null;
     }
 
+    //Com todas as Sessoes
     public List<SessaoModel> listarSessoes(){
         return sessaoRepository.findAll();
     }
@@ -43,11 +51,35 @@ public class SessaoService {
         return sessaoRepository.findById(id);
     }
 
+    //Deletar...
     public boolean excluirSessao(int id) {
         if (sessaoRepository.existsById(id)){
             sessaoRepository.deleteById(id);
             return true;
         }
         return false;
+    }
+
+    //Apenas Sessoes ativas
+    public List<SessaoModel> listarSessoesAtivas() {
+        return sessaoRepository.findByAtivaTrue();
+    }
+
+    public List<SessaoModel> listarSessoesAtivasPorFilme(int filmeId) {
+        return sessaoRepository.findByFilmeIdAndAtivaTrue(filmeId);
+    }
+
+    public Optional<SessaoModel> buscarSessaoAtivaPoNumero(int numeroSessao){
+        return sessaoRepository.findByNumeroSessaoAndAtivaTrue(numeroSessao);
+    }
+
+    public SessaoModel desativarSessao(int id) {
+        Optional<SessaoModel> sessao = sessaoRepository.findById(id);
+        if (sessao.isPresent()) {
+            SessaoModel s = sessao.get();
+            s.setAtiva(false);
+            return sessaoRepository.save(s);
+        }
+        return null;
     }
 }

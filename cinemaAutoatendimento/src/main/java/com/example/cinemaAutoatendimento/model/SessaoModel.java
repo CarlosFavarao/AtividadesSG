@@ -31,6 +31,10 @@ public class SessaoModel {
     @JoinColumn(name = "id_filme", nullable = false)
     private FilmeModel filme;
 
+    @Setter
+    @Column(nullable = false)
+    private boolean ativa = true;
+
     public SessaoModel() {}
 
     public SessaoModel(FilmeModel filme, LocalTime horario_fim, LocalTime horario_inicio, int numero_sessao) {

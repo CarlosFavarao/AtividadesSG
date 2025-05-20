@@ -16,6 +16,7 @@ public class SessaoController {
     @Autowired
     private SessaoService sessaoService;
 
+    //CRUD
     @PostMapping
     public SessaoModel salvarSessao(@RequestBody SessaoModel sessao) {
         return sessaoService.salvarSessao(sessao);
@@ -50,4 +51,28 @@ public class SessaoController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    //Sessoes Ativas
+
+    @GetMapping("/ativas")
+    public List<SessaoModel> listarSessoesAtivas() {
+        return sessaoService.listarSessoesAtivas();
+    }
+
+    @GetMapping("/numero/{numeroSessao}")
+    public ResponseEntity<SessaoModel> buscarSesaoAtivaPorNumero(@PathVariable int numeroSessao){
+        Optional<SessaoModel> sessao = sessaoService.buscarSessaoAtivaPoNumero(numeroSessao);
+        return sessao.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/ativas/filme/{filmeId}")
+    public List<SessaoModel> listarSessoesAtivasPorFilme(@PathVariable int filmeId) {
+        return sessaoService.listarSessoesAtivasPorFilme(filmeId);
+    }
+
+    @PutMapping("/{id}/desativar")
+    public SessaoModel desativarSessao(@PathVariable int id) {
+        return sessaoService.desativarSessao(id);
+    }
+
 }
