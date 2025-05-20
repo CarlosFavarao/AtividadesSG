@@ -9,5 +9,4 @@ public class CinemaAutoatendimentoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CinemaAutoatendimentoApplication.class, args);
 	}
-
 }
