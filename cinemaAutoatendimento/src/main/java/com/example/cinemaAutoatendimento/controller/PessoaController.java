@@ -28,8 +28,12 @@ public class PessoaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PessoaModel> buscarPessoaPorId(@PathVariable int id){
-        Optional<PessoaModel> pessoa = pessoaService.buscarPessoaPorId(id);
-        return pessoa.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        try {
+            PessoaModel pessoa = pessoaService.buscarPessoaPorId(id);
+            return ResponseEntity.ok(pessoa);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("/{id}")

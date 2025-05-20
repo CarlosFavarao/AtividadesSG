@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface AssentoRepository extends JpaRepository<AssentoModel, Integer> {
     List<AssentoModel> findBySessaoId(int sessaoId);
-    List<AssentoModel> findBySessaoIdAndOcupadoFalse(int sessoId);
+    List<AssentoModel> findBySessaoIdAndPessoaIsNull(int sessoId);
 }

@@ -21,9 +21,11 @@ public class PessoaService {
         return pessoaRepository.findAll();
     }
 
-    public Optional<PessoaModel> buscarPessoaPorId(int id){
-        return pessoaRepository.findById(id);
+    public PessoaModel buscarPessoaPorId(int id){
+        return pessoaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pessoa não encontrada com id " + id));
     }
+
 
     public boolean excluirPessoa(int id) {
         if (pessoaRepository.existsById(id)){

@@ -26,15 +26,16 @@ public class AssentoModel {
     private SessaoModel sessao;
 
     @Setter
-    @Column
-    private boolean ocupado;
+    @ManyToOne
+    @JoinColumn(name ="id_pessoa")
+    private PessoaModel pessoa;
 
     public AssentoModel() {}
 
-    public AssentoModel(int fileira, int numero, SessaoModel sessao, boolean ocupado){
+    public AssentoModel(int fileira, int numero, SessaoModel sessao, PessoaModel pessoa){
         this.fileira = fileira;
         this.numero = numero;
         this.sessao = sessao;
-        this.ocupado = ocupado;
+        this.pessoa = pessoa;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.cinemaAutoatendimento.service;
 
 import com.example.cinemaAutoatendimento.model.AssentoModel;
+import com.example.cinemaAutoatendimento.model.PessoaModel;
 import com.example.cinemaAutoatendimento.model.SessaoModel;
 import com.example.cinemaAutoatendimento.repository.AssentoRepository;
 import com.example.cinemaAutoatendimento.repository.SessaoRepository;
@@ -31,27 +32,21 @@ public class AssentoService {
     }
 
     public List<AssentoModel> listarAssentosLivresPorSessao(int sessaoId){
-        return assentoRepository.findBySessaoIdAndOcupadoFalse(sessaoId);
+        return assentoRepository.findBySessaoIdAndPessoaIsNull(sessaoId);
     }
 
-    public AssentoModel ocuparAssento(int id){
-        Optional<AssentoModel> assento = assentoRepository.findById(id);
-        if (assento.isPresent()) {
-            AssentoModel assentoOcupado = assento.get();
-            assentoOcupado.setOcupado(true);
-            return assentoRepository.save(assentoOcupado);
-        }
-        return null;
+    public AssentoModel ocuparAssento(int id, PessoaModel pessoa){
+        AssentoModel assento = assentoRepository.findById(id).orElseThrow(() -> new RuntimeException("Assento não encontrado"));
+        assento.setPessoa(pessoa);
+
+        return  assentoRepository.save(assento);
     }
 
-    public AssentoModel desocuparAssento(int id) {
-        Optional<AssentoModel> assento = assentoRepository.findById(id);
-        if (assento.isPresent()) {
-            AssentoModel assentoDesocupado = assento.get();
-            assentoDesocupado.setOcupado(false);
-            return assentoRepository.save(assentoDesocupado);
-        }
-        return null;
+    public AssentoModel desocuparAssento(int id, PessoaModel pessoa) {
+        AssentoModel assento = assentoRepository.findById(id).orElseThrow(() -> new RuntimeException("Assento não encontrado"));
+        assento.setPessoa(null);
+
+        return  assentoRepository.save(assento);
     }
 
     public boolean excluirAssento(int id){
