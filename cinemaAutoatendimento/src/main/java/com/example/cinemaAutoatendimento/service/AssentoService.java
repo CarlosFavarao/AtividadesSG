@@ -26,7 +26,6 @@ public class AssentoService {
         return assentoRepository.save(assento);
     }
 
-
     public List<AssentoModel> listarAssentosPorSessao(Long sessaoId){
         return assentoRepository.findBySessaoId(sessaoId);
     }
