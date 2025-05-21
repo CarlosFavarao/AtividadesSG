@@ -10,4 +10,5 @@ import java.util.List;
 public interface AssentoRepository extends JpaRepository<AssentoModel, Long> {
     List<AssentoModel> findBySessaoId(Long sessaoId);
     List<AssentoModel> findBySessaoIdAndPessoaIsNull(Long sessoId);
+    boolean existsBySessaoIdAndPessoaIsNotNull(Long sessaoId);
 }

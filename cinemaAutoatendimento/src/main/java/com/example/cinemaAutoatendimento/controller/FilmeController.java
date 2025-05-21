@@ -38,11 +38,11 @@ public class FilmeController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluirFilme(@PathVariable Long id) {
-        boolean deleted = filmeService.excluirFilme(id);
-        if (deleted){
+        boolean sucesso = filmeService.excluirFilme(id);
+        if (sucesso){
             return ResponseEntity.noContent().build();
         }else{
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(400).build();
         }
     }
 }
