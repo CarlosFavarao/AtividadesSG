@@ -36,6 +36,11 @@ public class FilmeController {
         return filmeService.acharFilmePorId(id);
     }
 
+    @GetMapping("/em-cartaz")
+    public List<FilmeModel> listarFilmesEmCartaz(){
+        return filmeService.listarFilmesEmCartaz();
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluirFilme(@PathVariable Long id) {
         boolean sucesso = filmeService.excluirFilme(id);

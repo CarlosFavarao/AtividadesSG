@@ -18,18 +18,18 @@ public class FilmeModel {
     private String nome;
 
     @Setter
-    @Column(nullable = false)
-    private LocalDate data_inicio;
+    @Column(name = "data_inicio", nullable = false)
+    private LocalDate dataInicio;
 
     @Setter
-    @Column(nullable = false)
-    private LocalDate data_fim;
+    @Column(name = "dataFim", nullable = false)
+    private LocalDate dataFim;
 
     public FilmeModel() {} //Construtor padrão, não lembrava dele. Porém, é essencial pra o funcionamento do JPA
 
-    public FilmeModel(LocalDate data_fim, String nome, LocalDate data_inicio) {
-        this.data_fim = data_fim;
+    public FilmeModel(LocalDate dataFim, String nome, LocalDate dataInicio) {
+        this.dataFim = dataFim;
         this.nome = nome;
-        this.data_inicio = data_inicio;
+        this.dataInicio = dataInicio;
     }
 }

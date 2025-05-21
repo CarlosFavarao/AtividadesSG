@@ -32,8 +32,8 @@ public class FilmeService {
         if (filmeExistente.isPresent()){
             FilmeModel filme = filmeExistente.get();
             filme.setNome(filmeAtualizado.getNome());
-            filme.setData_inicio(filmeAtualizado.getData_inicio());
-            filme.setData_fim(filmeAtualizado.getData_fim());
+            filme.setDataInicio(filmeAtualizado.getDataInicio());
+            filme.setDataFim(filmeAtualizado.getDataFim());
 
             return filmeRepository.save(filme);
         }
@@ -42,6 +42,10 @@ public class FilmeService {
 
     public List<FilmeModel> listarFilmes(){
         return filmeRepository.findAll();
+    }
+
+    public List<FilmeModel> listarFilmesEmCartaz(){
+        return filmeRepository.findFilmesEmCartazHoje();
     }
 
     public Optional<FilmeModel> acharFilmePorId(Long id){
